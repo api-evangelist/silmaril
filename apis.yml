@@ -1,7 +1,30 @@
 aid: silmaril
 name: Silmaril
-description: Silmaril is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Silmaril is a Y Combinator-backed runtime security company that builds an AI
+  application firewall for agentic systems. The Silmaril Firewall classifies
+  prompts, retrieved context, tool calls, tool responses, model output, and
+  accumulated execution state before harmful outcomes materialize, returning a
+  benign/malicious prediction plus a primary-outcome classification across
+  secret exposure, information disclosure, control abuse, system compromise, and
+  service disruption. It ships first-party TypeScript, Python, Go, and Java
+  SDKs, LiteLLM and Vercel AI gateway guardrails, LangChain/LangGraph handlers,
+  and agent plugins for Codex, Claude Code, OpenClaw, and Hermes, plus a hosted
+  read-only MCP evidence server. Offered as managed and customer-controlled
+  self-hosted container deployments.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.silmaril.dev/icon.svg
 url: https://raw.githubusercontent.com/api-evangelist/silmaril/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,12 +32,93 @@ x-backed-by:
 - y-combinator
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- AI Security
+- AI Firewall
+- Prompt Injection
+- Agent Security
+- Runtime Security
+- Guardrails
+- MCP
+- LLM Security
+- Developer Tools
+apis:
+- name: Silmaril Firewall API
+  description: >-
+    AI application firewall classify API. A Firewall client sends each sanitized
+    classification input (user input, tool response, model output, or system
+    prompt) with a hook label and optional tool name to a tenant-issued classify
+    endpoint, and receives a prediction (BENIGN/MALICIOUS), a primary outcome,
+    and score/threshold data. Credentials and the classify endpoint are issued
+    by Silmaril (not self-serve). A companion hosted, read-only MCP evidence
+    server exposes firewall findings to agents.
+  humanURL: https://silmaril.dev/docs
+  baseURL: https://firewall-mcp.silmaril.dev
+  tags:
+  - AI Firewall
+  - Runtime Security
+  - Prompt Injection
+  properties:
+  - type: Documentation
+    url: https://silmaril.dev/docs
+  - type: APIReference
+    url: https://silmaril.dev/docs
+common:
+- type: DeveloperPortal
+  url: https://silmaril.dev/docs
+- type: Documentation
+  url: https://silmaril.dev/docs
+- type: APIReference
+  url: https://silmaril.dev/docs
+- type: GettingStarted
+  url: https://silmaril.dev/docs
+- type: GitHubOrganization
+  url: https://github.com/Silmaril-Security
+- type: Support
+  url: https://cal.com/silmaril/30min
+- type: StatusPage
+  url: https://silmaril.dev/status
+- type: TermsOfService
+  url: https://silmaril.dev/terms
+- type: PrivacyPolicy
+  url: https://silmaril.dev/privacy
+- type: LLMsTxt
+  url: llms/silmaril-llms.txt
+- type: Packages
+  url: packages/silmaril-packages.yml
+- type: SDKs
+  url: packages/silmaril-packages.yml
+- type: MCPServer
+  url: mcp/silmaril-mcp.yml
+- type: Authentication
+  url: authentication/silmaril-authentication.yml
+- type: Conventions
+  url: conventions/silmaril-conventions.yml
+- type: ErrorCatalog
+  url: errors/silmaril-error-codes.yml
+- type: ChangeLog
+  url: changelog/silmaril-changelog.yml
+- type: Lifecycle
+  url: lifecycle/silmaril-lifecycle.yml
+- type: Conformance
+  url: conformance/silmaril-conformance.yml
+- type: DataModel
+  url: data-model/silmaril-data-model.yml
+- type: Security
+  url: security/silmaril-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/silmaril-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/silmaril-domain-security.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

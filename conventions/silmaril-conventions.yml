@@ -1,0 +1,60 @@
+generated: '2026-07-21'
+method: searched
+source: https://silmaril.dev/docs
+authentication:
+  style: Silmaril-issued API key (header/x-api-key) for the classify + guardrail
+    APIs; OAuth (Auth0) for the read-only MCP evidence server.
+  ref: authentication/silmaril-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key contract is documented. Each classify() call sends one
+    complete event; sequence identity is carried by metadata.conversationId
+    rather than an idempotency key.
+request_tracing:
+  supported: true
+  fields:
+  - metadata.silmaril.request_id  # one per event, added by SDK 0.5
+  - metadata.conversationId       # preserved exactly for sequence identity
+  - request_id
+  - input_index
+  - chunk_index
+  - chunk_count
+  - sdk_language
+  - sdk_version
+event_contract:
+  description: >-
+    SDK 0.5 sends each sanitized classification input as one complete event
+    (no client chunking), preserves exact metadata.conversationId, and adds one
+    metadata.silmaril.request_id per event.
+hooks:
+  labels: [USER_INPUT, TOOL_RESPONSE]
+  also_covers: [model output, system prompt content]
+  optional: tool_name
+result_envelope:
+  fields:
+  - prediction        # required backend field: BENIGN | MALICIOUS
+  - primary_outcome   # optional malicious detail (see errors/silmaril-error-codes.yml)
+  - outcome_scores
+  - detector_scores
+  - detector_counts
+  - score
+  - threshold         # tenant-owned Firewall backend configuration (since 0.4.0)
+  ref: errors/silmaril-error-codes.yml
+enforcement_modes:
+  shadow_mode: >-
+    Returns verdicts/telemetry while suppressing block exceptions, so
+    would-block decisions can be measured before enforcing.
+  warn_mode: >-
+    LiteLLM guardrail mode that evaluates payloads and returns warning metadata
+    while keeping traffic moving.
+  fallback: unreachable_fallback (LiteLLM) supports fail_open.
+versioning:
+  scheme: semver per SDK (all SDKs at 0.5.0 / v0.5.0, updated 2026-07-20)
+  ref: changelog/silmaril-changelog.yml
+rate_limit_signaling:
+  documented: false
+error_handling:
+  exceptions: [FirewallBlockedException, BatchFirewallBlockedException]
+  carry: [score, threshold]
+  ref: errors/silmaril-error-codes.yml

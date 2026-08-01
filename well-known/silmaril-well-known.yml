@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: probed
+host: https://www.silmaril.dev
+documents:
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+- path: /llms.txt
+  status: 200
+  note: Not under /.well-known but present; saved verbatim at llms/silmaril-llms.txt.
+notes: >-
+  No /.well-known discovery documents are published on silmaril.dev. The MCP
+  server performs hosted OAuth discovery against the customer's Auth0 org (its
+  OIDC metadata lives on Auth0, not silmaril.dev).

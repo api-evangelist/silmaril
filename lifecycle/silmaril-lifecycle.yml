@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+source: https://silmaril.dev/docs
+versioning:
+  scheme: semver-per-sdk
+  current: 0.5.0
+  docs: https://silmaril.dev/docs
+  notes: >-
+    TypeScript, Python, Go, and Java SDKs are versioned independently but tracked
+    together (all 0.5.0 / v0.5.0 as of 2026-07-20). The classify event contract
+    is versioned with the SDK line (SDK 0.5 event contract).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No formal deprecation/Sunset-header policy published. Precedent from the SDK
+    changelog: renamed blocking exceptions kept deprecated aliases for one
+    release (0.4.0).
+availability:
+  model: managed and customer-controlled self-hosted (AWS ECS/EKS, GCP Cloud
+    Run/GKE, Azure Container Apps/AKS, OCI OKE containers)
+  self_serve: false
+  provisioning: Book a call to receive credentials and the classify/guardrail endpoints.
+status_page: https://silmaril.dev/status
+status_current: All Systems Operational
+sla:
+  url: null
+deprecated_operations: []

@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/Silmaril-Security/silmaril-firewall-mcp
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    Hosted MCP server authenticates via OAuth 2.0 (authorization code) with
+    hosted OAuth discovery through the customer's Auth0 organization.
+- id: oidc
+  conforms: true
+  evidence: OAuth/OIDC login via Auth0 organization for MCP access.
+- id: mcp
+  conforms: true
+  evidence: >-
+    Publishes a Model Context Protocol server (@modelcontextprotocol/sdk
+    ^1.29.0) at https://firewall-mcp.silmaril.dev/mcp.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Classify API returns a verdict/outcome envelope, not application/problem+json.
+- id: fapi
+  conforms: false
+- id: scim
+  conforms: false
+- id: fhir
+  conforms: false
+notes: >-
+  No published third-party certification program (SOC 2, ISO 27001, PCI, HIPAA,
+  FedRAMP) was found, so no Compliance pointer is emitted. This file asserts
+  cross-cutting technical standards only.

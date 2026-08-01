@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://github.com/Silmaril-Security/silmaril-firewall-mcp
+server:
+  name: silmaril-firewall
+  description: >-
+    Hosted, read-only, tenant-scoped MCP server that lets an agent read Silmaril
+    Firewall security evidence (findings, metrics, suspicious users,
+    investigation packets, traces) from an authorized tenant. Backed by
+    Silmaril's firewall-ui API; does not connect directly to customer AWS,
+    databases, traces, or runtime infrastructure.
+  transport: http
+  url: https://firewall-mcp.silmaril.dev/mcp
+  auth:
+    type: oauth2
+    provider: Auth0
+    notes: >-
+      Hosted MCP OAuth discovery; browser login to the customer organization.
+      Access follows the signed-in org and is scoped to authorized Firewall
+      data. Aggregate/search tools require less access than full payload/trace
+      tools.
+  install: codex mcp add silmaril-firewall --url https://firewall-mcp.silmaril.dev/mcp
+  sdk: "@modelcontextprotocol/sdk ^1.29.0"
+tools:
+- name: list_firewalls
+  description: Discover available firewall deployments the account can access.
+- name: get_firewall
+  description: Inspect a deployment's runtime, freshness, warnings, and capabilities.
+- name: get_schema
+  description: Confirm available time ranges, limits, filters, and suspicious-user defaults.
+- name: get_metrics
+  description: Return firewall metrics for posture and trend questions.
+- name: get_finding_totals
+  description: Return finding totals over a time window.
+- name: group_findings
+  description: Group findings for posture and trend analysis.
+- name: list_findings
+  description: Return compact finding previews.
+- name: list_suspicious_users
+  description: Review user-level abuse and bot-farming correlation.
+- name: get_investigation_packet
+  description: Assemble evidence before opening full payloads or traces.
+- name: get_finding
+  description: Return a full finding payload (requires detail access).
+- name: get_finding_trace
+  description: Return a full finding trace (requires detail access).
+notes: >-
+  Official published MCP server. Tool names taken verbatim from the repo's
+  docs/customer-guide.md recommended tool path.

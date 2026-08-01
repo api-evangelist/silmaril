@@ -1,0 +1,51 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/Silmaril-Security/silmaril-firewall-mcp/blob/main/docs/customer-guide.md
+note: >-
+  No OpenAPI is published; this entity graph is captured from the documented MCP
+  evidence surface (firewall-ui API) and the classify result contract.
+entities:
+- name: Firewall
+  key: firewall_id
+  description: A firewall deployment/environment the account is authorized to access.
+- name: Finding
+  description: >-
+    A recorded security finding (jailbreak attempt, data exfiltration, secret
+    exposure, system/account compromise, service disruption/cost abuse, model
+    distillation, NSFW abuse) with supporting evidence.
+  fields: [prediction, primary_outcome, score, threshold, evidence_id]
+- name: SuspiciousUser
+  description: A user flagged for abuse review, with bot-farming correlation.
+- name: InvestigationPacket
+  description: Assembled evidence bundle used before opening full payloads or traces.
+- name: FindingTrace
+  description: Full trace for a finding (requires detail access).
+- name: Metrics
+  description: Aggregate posture/trend metrics and finding totals over a time window.
+- name: ClassifyEvent
+  description: >-
+    One sanitized classification input sent to the classify API with a hook
+    label and optional tool name; carries conversationId and silmaril.request_id.
+relationships:
+- from: Finding
+  to: Firewall
+  type: belongs_to
+  via: firewall_id
+- from: FindingTrace
+  to: Finding
+  type: belongs_to
+  via: finding_id
+- from: InvestigationPacket
+  to: Finding
+  type: has_many
+- from: Metrics
+  to: Firewall
+  type: belongs_to
+  via: firewall_id
+- from: SuspiciousUser
+  to: Finding
+  type: has_many
+- from: ClassifyEvent
+  to: Finding
+  type: has_many
+  note: A classification event may produce firewall findings.

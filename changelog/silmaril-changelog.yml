@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/Silmaril-Security/sdk-python/blob/main/CHANGELOG.md
+scheme: semver
+current_version: 0.5.0
+scope: >-
+  Per-SDK changelog; the Python SDK CHANGELOG is the most complete published
+  history. All four SDKs (TS, Python, Go, Java) were updated to 0.5.0 on
+  2026-07-20.
+entries:
+- version: 0.5.0
+  date: '2026-07-15'
+  breaking: false
+  highlights:
+  - Send every classify() input as one complete event without client chunking.
+  - Preserve exact metadata.conversationId and emit one metadata.silmaril.request_id per event.
+  - Require backend prediction for enforcement while preserving optional outcome scores.
+- version: 0.4.2
+  date: '2026-06-02'
+  breaking: false
+  highlights:
+  - Add typed firewall outcome constants, ordered outcome tuples, descriptions, validation helpers, response normalizers.
+  - Type BlockResult.primary_outcome, outcome_scores, detector_scores, detector_counts around the canonical outcome taxonomy.
+  - Document outcome routing examples for shadow-mode classify() results.
+- version: 0.4.1
+  date: '2026-05-24'
+  breaking: false
+  highlights:
+  - Recover the 0.4.x line after the v0.4.0 tag was created but PyPI publishing failed.
+  - Harden release workflow to publish to PyPI before creating the Git tag.
+  - Lower the requests dependency floor from >=2.33.0 to >=2.31.0.
+- version: 0.4.0
+  date: '2026-05-24'
+  breaking: true
+  highlights:
+  - Move score threshold decisions to tenant-owned Firewall backend configuration.
+  - Add SDK reconstruction metadata (sdk_language, sdk_version, request_id, input_index, chunk_index, chunk_count).
+  - Rename blocking exceptions to FirewallBlockedException / BatchFirewallBlockedException (deprecated aliases kept one release).
+  - Add chunk metadata support for long-input fanout and batch classification.
+- version: 0.3.2
+  breaking: false
+  highlights:
+  - Add request metadata support.

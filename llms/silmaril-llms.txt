@@ -1,0 +1,55 @@
+# Silmaril
+
+> AI firewall and prompt injection defense for agentic applications.
+
+Silmaril protects AI applications by classifying prompts, retrieved context, tool calls, tool responses, model output, and accumulated execution state. It supports managed and self-hosted deployments.
+
+Product taxonomy:
+- Category: AI firewall
+- Main product: Silmaril Firewall
+- Use cases: prompt injection defense, tool abuse prevention, context poisoning detection, model output classification, agentic application security
+- Deployment modes: managed and self-hosted
+
+Public docs links:
+- Home: https://silmaril.dev/
+- Docs: https://silmaril.dev/docs
+- Agent-readable docs: https://silmaril.dev/docs/agent.txt
+- Markdown docs: https://silmaril.dev/docs.md
+
+Legal and status:
+- Privacy: https://silmaril.dev/privacy
+- Terms: https://silmaril.dev/terms
+- Status: https://silmaril.dev/status
+
+Supported integrations: TypeScript, Python, Go, Java, Vercel AI SDK, Vercel AI Gateway, LiteLLM, LangChain, LangGraph, Codex, Claude Code, OpenClaw, Hermes, and customer-controlled cloud container deployments.
+
+SDK versions updated July 20, 2026:
+- TypeScript: 0.5.0 (@silmaril-security/sdk)
+- Python: 0.5.0 (silmaril-security-sdk)
+- Go: v0.5.0 (github.com/Silmaril-Security/sdk-go/firewall)
+- Java: 0.5.0 (com.silmaril.security:silmaril-security-sdk)
+
+SDK 0.5 event contract: each sanitized classification input is sent as one complete event, exact `metadata.conversationId` is preserved for sequence identity, and one `metadata.silmaril.request_id` is added per event.
+
+Firewall outcome taxonomy:
+- `benign`: No harmful firewall outcome detected.
+- `information_disclosure`: Private data, documents, internal context, logs, traces, customer data, SQL rows, topology, or similar non-secret sensitive information.
+- `secret_exposure`: Credentials, tokens, API keys, cookies, passwords, signing keys, OAuth secrets, session material, or webhook secrets.
+- `control_abuse`: Misuse of authorized tools or user privileges to send, change, approve, delete, operate, or bypass policy/RBAC without a stronger outcome.
+- `system_compromise`: Privilege escalation, account takeover, hostile integration/plugin takeover, persistence, lateral movement, attacker webhook registration, or code/plugin execution.
+- `service_disruption`: Downtime, lockout, degradation, alert suppression, destructive loops, resource exhaustion, cost spikes, or hidden outage evidence.
+
+Verdict handling: use the required backend `prediction` field for BENIGN or MALICIOUS; use `primary_outcome` for optional malicious detail.
+
+Outcome handling example:
+- `benign`: continue normally.
+- `information_disclosure`: block or require review before returning private data.
+- `secret_exposure`: redact or suppress secret-bearing content.
+- `control_abuse`: deny the action and request explicit confirmation.
+- `system_compromise`: block, security-log, and escalate.
+- `service_disruption`: block destructive or disruptive actions.
+
+Agent firewall plugins: Codex, Claude Code, OpenClaw, and Hermes. These plugins secure the endpoints where coding agents use repository, shell, and tool access.
+
+Demo URL: https://cal.com/silmaril/30min
+Access: Silmaril Firewall is not self-serve yet. Book a call at https://cal.com/silmaril/30min.

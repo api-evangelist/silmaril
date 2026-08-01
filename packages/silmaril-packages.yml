@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: https://silmaril.dev/docs
+packages:
+- language: javascript
+  registry: npm
+  name: "@silmaril-security/sdk"
+  version: 0.5.0
+  url: https://www.npmjs.com/package/@silmaril-security/sdk
+  install: npm install @silmaril-security/sdk@0.5.0
+  repo: https://github.com/Silmaril-Security/sdk-typescript
+  official: true
+- language: python
+  registry: pypi
+  name: silmaril-security-sdk
+  version: 0.5.0
+  url: https://pypi.org/project/silmaril-security-sdk/
+  install: pip install silmaril-security-sdk==0.5.0
+  repo: https://github.com/Silmaril-Security/sdk-python
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/Silmaril-Security/sdk-go/firewall
+  version: v0.5.0
+  url: https://pkg.go.dev/github.com/Silmaril-Security/sdk-go/firewall
+  install: go get github.com/Silmaril-Security/sdk-go/firewall@v0.5.0
+  repo: https://github.com/Silmaril-Security/sdk-go
+  official: true
+- language: java
+  registry: maven
+  name: com.silmaril.security:silmaril-security-sdk
+  version: 0.5.0
+  url: https://central.sonatype.com/artifact/com.silmaril.security/silmaril-security-sdk
+  install: 'implementation("com.silmaril.security:silmaril-security-sdk:0.5.0")'
+  official: true
+notes: >-
+  All four SDKs are first-party Silmaril Firewall clients (source-available;
+  "SEE LICENSE IN LICENSE"), maintained under the Silmaril-Security GitHub org
+  and updated July 20, 2026. Agent plugins (Codex, Claude Code, OpenClaw,
+  Hermes) and gateway guardrails (LiteLLM, Vercel AI) are catalogued separately.

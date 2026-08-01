@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: https://silmaril.dev/docs
+description: >-
+  Silmaril's classify API does not return RFC 9457 problem+json errors; its
+  "error" surface is (1) the firewall verdict/outcome taxonomy returned on every
+  classification and (2) typed block exceptions raised by the SDKs in
+  enforcement mode. Both are captured here.
+verdict:
+  prediction:
+    field: prediction
+    values: [BENIGN, MALICIOUS]
+    note: Required backend field used for enforcement.
+outcome_field: primary_outcome
+outcomes:
+- code: benign
+  meaning: No harmful firewall outcome detected.
+  action: Continue normally.
+- code: information_disclosure
+  meaning: >-
+    Private data, documents, internal context, logs, traces, customer data, SQL
+    rows, topology, or similar non-secret sensitive information.
+  action: Block or require review before returning private data.
+- code: secret_exposure
+  meaning: >-
+    Credentials, tokens, API keys, cookies, passwords, signing keys, OAuth
+    secrets, session material, or webhook secrets.
+  action: Redact or suppress secret-bearing content.
+- code: control_abuse
+  meaning: >-
+    Misuse of authorized tools or user privileges to send, change, approve,
+    delete, operate, or bypass policy/RBAC without a stronger outcome.
+  action: Deny the action and request explicit confirmation.
+- code: system_compromise
+  meaning: >-
+    Privilege escalation, account takeover, hostile integration/plugin takeover,
+    persistence, lateral movement, attacker webhook registration, or code/plugin
+    execution.
+  action: Block, security-log, and escalate.
+- code: service_disruption
+  meaning: >-
+    Downtime, lockout, degradation, alert suppression, destructive loops,
+    resource exhaustion, cost spikes, or hidden outage evidence.
+  action: Block destructive or disruptive actions.
+exceptions:
+- name: FirewallBlockedException
+  raised: SDK enforcement mode when a call is blocked.
+  fields: [score, threshold]
+- name: BatchFirewallBlockedException
+  raised: Enforcement mode for batch/long-input fanout classification.
+  fields: [score, threshold]
+notes: >-
+  Score threshold decisions are tenant-owned Firewall backend configuration
+  (since SDK 0.4.0). Additional recorded detection categories include model
+  distillation and NSFW content abuse (per the MCP evidence surface).
