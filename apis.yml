@@ -12,6 +12,17 @@ description: >-
   and agent plugins for Codex, Claude Code, OpenClaw, and Hermes, plus a hosted
   read-only MCP evidence server. Offered as managed and customer-controlled
   self-hosted container deployments.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
