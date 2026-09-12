@@ -84,6 +84,8 @@ apis:
   - type: APIReference
     url: https://silmaril.dev/docs
 common:
+- type: Website
+  url: https://www.silmaril.dev/
 - type: DeveloperPortal
   url: https://silmaril.dev/docs
 - type: Documentation
