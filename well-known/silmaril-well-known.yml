@@ -1,21 +1,50 @@
-generated: '2026-07-21'
+generated: '2026-09-19'
 method: probed
 host: https://www.silmaril.dev
-documents:
-- path: /.well-known/security.txt
-  status: 404
-- path: /.well-known/openid-configuration
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-- path: /llms.txt
-  status: 200
-  note: Not under /.well-known but present; saved verbatim at llms/silmaril-llms.txt.
-notes: >-
-  No /.well-known discovery documents are published on silmaril.dev. The MCP
-  server performs hosted OAuth discovery against the customer's Auth0 org (its
-  OIDC metadata lives on Auth0, not silmaril.dev).
+notes: No /.well-known discovery documents are published on silmaril.dev. The MCP server performs hosted
+  OAuth discovery against the customer's Auth0 org (its OIDC metadata lives on Auth0, not silmaril.dev).
+hosts:
+- host: https://www.silmaril.dev
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://firewall-mcp.silmaril.dev
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: silmaril-firewall-mcp-oauth-protected-resource.json
+    bytes: 423
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: silmaril-firewall-mcp-oauth-authorization-server.json
+    bytes: 591
+  path_echo_control: passed
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://firewall-mcp.silmaril.dev
+    path: /.well-known/oauth-protected-resource
+    file: silmaril-firewall-mcp-oauth-protected-resource.json
+  - host: https://firewall-mcp.silmaril.dev
+    path: /.well-known/oauth-authorization-server
+    file: silmaril-firewall-mcp-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
