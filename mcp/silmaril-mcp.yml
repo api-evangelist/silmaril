@@ -50,3 +50,26 @@ deployment:
   probe: gated
   checked: '2026-08-12'
   source: catalog MCP census
+rfc9728:
+  endpoint: https://firewall-mcp.silmaril.dev/mcp
+  metadata_url: https://firewall-mcp.silmaril.dev/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://firewall-mcp.silmaril.dev/mcp
+    authorization_servers:
+    - https://firewall-mcp.silmaril.dev
+    scopes_supported:
+    - firewalls:read
+    - metrics:read
+    - findings:read
+    - findings:detail
+    - payload:read
+    - trace:read
+    - conversations:read
+    bearer_methods_supported:
+    - header
+    resource_name: Silmaril Firewall Evidence MCP
+    resource_documentation: https://github.com/Silmaril-Security/silmaril-firewall-mcp
